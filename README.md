@@ -1,8 +1,6 @@
 # Norder Sentry SIEM/SOAR Platform MVP
 
-This is a refactored version of the Norder Sentry SIEM/SOAR MVP.
-
-The original demo was split into a more platform-like structure:
+This is Norder Sentry SIEM/SOAR MVP.
 
 ```text
 app/
