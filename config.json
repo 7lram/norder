@@ -4,13 +4,36 @@
     "admin_scan_threshold": 3,
     "endpoint_error_spike": 3,
     "ip_error_burst": 4,
-    "sms_abuse_threshold": 3
+    "sms_abuse_threshold": 3,
+    "sms_entry_time_threshold": 10,
+    "sms_off_hours_threshold": 2,
+    "sms_same_phone_threshold": 2,
+    "seat_block_hop_threshold": 2,
+    "stadium_peak_error_threshold": 3,
+    "sentry_cloud_error_threshold": 3,
+    "simultaneous_venue_window_seconds": 600
+  },
+  "stadium": {
+    "peak_phases": ["pre_game", "inning_break", "cleaning_time", "post_game"],
+    "allowed_entry_channels": ["qr", "kakao_app"],
+    "state_change_paths": ["/orders", "/payments", "/cart"],
+    "known_venues": ["jamsil-baseball", "gocheok-sky-dome"],
+    "known_seat_blocks": ["A103", "A104", "A105", "B205", "D402"],
+    "game_schedules": [
+      {"venue_id": "jamsil-baseball", "start": "2026-06-10T08:00:00+09:00", "end": "2026-06-10T22:30:00+09:00"},
+      {"venue_id": "gocheok-sky-dome", "start": "2026-06-10T08:00:00+09:00", "end": "2026-06-10T22:30:00+09:00"}
+    ]
+  },
+  "network": {
+    "trusted_network_types": ["stadium_wifi", "stadium_nat", "stadium_lte", "carrier_lte", "carrier_5g"],
+    "untrusted_network_types": ["server_cloud", "vpn", "overseas", "unknown"]
   },
   "patterns": {
     "sqli": ["union select", "or 1=1", "sleep(", "--"],
     "xss": ["<script", "javascript:", "onerror=", "alert("],
     "admin_paths": ["/admin", "/adm", "/manager", "/phpmyadmin"],
-    "sensitive_keywords": ["password", "token", "authorization", "secret", "refresh_token", "access_token"]
+    "sensitive_keywords": ["password", "token", "authorization", "secret", "refresh_token", "access_token"],
+    "semantic_error_tokens": ["not found", "invalid venue", "no static resource", "없는 구장"]
   },
   "playbooks": {
     "credential_or_auth_attack": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block"],
@@ -18,6 +41,13 @@
     "payload_attack": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block", "open_code_review_task"],
     "admin_path_scan": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block", "suggest_waf_rule"],
     "sensitive_error_leak": ["notify_security_channel", "comment_sentry_issue", "open_secret_review_task"],
-    "endpoint_error_spike": ["notify_security_channel", "comment_sentry_issue", "open_stability_review_task"]
+    "endpoint_error_spike": ["notify_security_channel", "comment_sentry_issue", "open_stability_review_task"],
+    "stadium_order_flow_abuse": ["notify_security_channel", "comment_sentry_issue", "recommend_rate_limit", "hold_order_status_change_review"],
+    "stadium_peak_error_cluster": ["notify_security_channel", "comment_sentry_issue", "recommend_rate_limit", "notify_store_ops_channel", "open_stability_review_task"],
+    "legacy_api_bypass": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block", "suggest_waf_rule"],
+    "sentry_event_poisoning": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block", "open_log_integrity_review_task"],
+    "semantic_error_probing": ["notify_security_channel", "comment_sentry_issue", "dry_run_ip_block", "suggest_waf_rule"],
+    "stadium_context_violation": ["notify_security_channel", "comment_sentry_issue", "recommend_rate_limit", "dry_run_ip_block"],
+    "direct_payment_bypass": ["notify_security_channel", "comment_sentry_issue", "recommend_rate_limit", "hold_payment_review_task"]
   }
 }

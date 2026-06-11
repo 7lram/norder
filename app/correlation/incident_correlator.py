@@ -46,6 +46,19 @@ def _incident_type(rule_id):
         "LEAK-001": "sensitive_error_leak",
         "ENDPOINT-001": "endpoint_error_spike",
         "IP-001": "ip_error_burst",
+        "STADIUM-001": "stadium_order_flow_abuse",
+        "STADIUM-002": "stadium_seat_block_anomaly",
+        "STADIUM-003": "stadium_peak_error_cluster",
+        "VERSION-001": "legacy_api_bypass",
+        "VERSION-002": "legacy_api_bypass",
+        "SENTRY-001": "sentry_event_poisoning",
+        "SENTRY-002": "sentry_event_poisoning",
+        "SEMANTIC-001": "semantic_error_probing",
+        "STADIUM-004": "stadium_context_violation",
+        "STADIUM-005": "stadium_context_violation",
+        "STADIUM-006": "stadium_context_violation",
+        "STADIUM-007": "stadium_context_violation",
+        "STADIUM-008": "direct_payment_bypass",
     }.get(rule_id, "security_incident")
 
 
@@ -58,6 +71,19 @@ def _playbook(rule_id):
         "LEAK-001": "sensitive_error_leak",
         "ENDPOINT-001": "endpoint_error_spike",
         "IP-001": "credential_or_auth_attack",
+        "STADIUM-001": "stadium_order_flow_abuse",
+        "STADIUM-002": "stadium_order_flow_abuse",
+        "STADIUM-003": "stadium_peak_error_cluster",
+        "VERSION-001": "legacy_api_bypass",
+        "VERSION-002": "legacy_api_bypass",
+        "SENTRY-001": "sentry_event_poisoning",
+        "SENTRY-002": "sentry_event_poisoning",
+        "SEMANTIC-001": "semantic_error_probing",
+        "STADIUM-004": "stadium_context_violation",
+        "STADIUM-005": "stadium_context_violation",
+        "STADIUM-006": "stadium_context_violation",
+        "STADIUM-007": "stadium_context_violation",
+        "STADIUM-008": "direct_payment_bypass",
     }.get(rule_id, "endpoint_error_spike")
 
 
